@@ -10,8 +10,13 @@ function newGame () {
     game.currentGame = [];
     game.playerMoves = [];
     showScore();
+    addTurn();
 }
 
+function addTurn() {
+    game.playerMoves = [];
+    game.currentGame.push(game.choices[(Math.floor(Math.floor(Math.random())))]);
+}
 function showScore() {
     document.getElementById("score").innerText =game.score;
 }
