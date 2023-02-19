@@ -12,10 +12,13 @@ function newGame () {
     for (let circle of document.getElementsByClassName("circle")) {
         if (circle.getAttribute("data-listener") !== "true") {
             circle.addEventListener("click", (e) => {
-                let move = e.target.getAttribute("id");
-                lightsOn(move);
-                game.playerMoves.push(move);
-                playerTurn();
+                if (game.currentGame.lenght > 0) {
+                    let move = e.target.getAttribute("id");
+                    game.lastButton = move;
+                    lightsOn(move);
+                    game.playerMoves.push(move);
+                    playerTurn();
+                }
             });
             circle.setAttribute("data-listener", "true");
         }
@@ -41,12 +44,14 @@ function lightsOn(circ) {
 }
 
 function showTurns() {
+    game.turnInProgess = true;
     game.turnNumber = 0;
     let turns = setInterval(() => {
         lightsOn(game.currentGame[game.turnNumber]);
         game.turnNumber++;
         if (game.turnNumber >= game.currentGame.length) {
             clearInterval(turns);
+            game.turnInProgess = false;
         }      
     }, 800);
 }
@@ -59,6 +64,9 @@ function playerTurn() {
             showScore();
             addTurn();
         }
+    } else {
+        alert("wrong move!");
+        newGame();
     }
 }
 module.exports = { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn };
