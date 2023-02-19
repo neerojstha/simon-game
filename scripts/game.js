@@ -47,17 +47,17 @@ function showTurns() {
         game.turnNumber++;
         if (game.turnNumber >= game.currentGame.length) {
             clearInterval(turns);
-        }    
-    }, 800)
+        }      
+    }, 800);
+}
 
-    function playerTurn() {
-        let i = game.playerMoves.length - 1;
-        if (game.currentGame[i] === game.playerMoves[i]) {
-            if (game.currentGame.length == game.playerMoves.length) {
-                game.score++;
-                showScore();
-                addTurn();
-            }
+function playerTurn() {
+    let i = game.playerMoves.length - 1;
+    if (game.currentGame[i] === game.playerMoves[i]) {
+        if (game.currentGame.length == game.playerMoves.length) {
+            game.score++;
+            showScore();
+            addTurn();
         }
     }
 }
